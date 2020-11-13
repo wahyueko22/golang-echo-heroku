@@ -12,6 +12,7 @@ import (
 
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/go-playground/validator"
+	_ "github.com/joho/godotenv/autoload"
 	"github.com/labstack/echo/v4"
 	appMiddleware "github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/gommon/log"
@@ -106,8 +107,8 @@ func main() {
 	e.POST("/upload", services.FileUpload)
 
 	// SERVER HOST
-
-	e.Logger.Fatal(e.Start(":8080"))
+	//https://github.com/joho/godotenv
+	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", os.Getenv("PORT"))))
 }
 
 func customServerHeader(next echo.HandlerFunc) echo.HandlerFunc {
